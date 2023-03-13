@@ -16,8 +16,8 @@ public class IndexModel : PageModel
         Body = " 2";
     }
 
-    public void OnPost()
+    public async Task<IActionResult> OnPostAsync()
     {
-
+        return null;
     }
 }
