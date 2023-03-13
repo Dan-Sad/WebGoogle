@@ -17,7 +17,7 @@ header {
 	border-radius: 5px;
 	text-decoration: none;
 	float: right;
-	margin-right: 10px;
+	margin-right: 120px;
 }
 
 	.button:hover {
@@ -53,7 +53,8 @@ input[type="text"], textarea {
 
 textarea {
 	height: 200px;
-	min-width: 100%;
+	resize:vertical;
+	max-width: 100%;
 	min-height: 100px;
 }
 
