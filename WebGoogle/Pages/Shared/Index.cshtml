@@ -1,0 +1,40 @@
+﻿@page
+@model IndexModel
+@using Newtonsoft.Json;
+@using System.Net;
+@using WebGoogle.Models;
+@inject Microsoft.AspNetCore.Http.IHttpContextAccessor HttpContextAccessor
+
+<form method="post">
+    <button type="submit">Отправить</button>
+</form>
+
+@{
+    var cookies = HttpContextAccessor.HttpContext.Request.Cookies;
+    string cookieString = string.Join("; ", cookies.Select(c => $"{c.Key}={c.Value}"));
+
+    var httpClient = new HttpClient();
+    httpClient.DefaultRequestHeaders.Add("Cookie", cookieString);
+
+    string apiUrl = "https://localhost:7194/api/blogs";
+    HttpResponseMessage? response = await httpClient.GetAsync(apiUrl);
+
+    // Process API response
+    if (response.IsSuccessStatusCode)
+    {
+        string? json = await response.Content.ReadAsStringAsync();
+        List<BlogModel>? blogs = JsonConvert.DeserializeObject<List<BlogModel>>(json);
+
+        BlogModel blog = blogs.FirstOrDefault();
+        if (blog != null)
+        {
+            <h1>@blog.Title</h1>
+            <p>@blog.Body</p>
+        }
+    }
+    else
+    {
+        // Обработка ошибки API
+    }
+    
+}
