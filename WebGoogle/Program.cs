@@ -34,6 +34,7 @@ builder.Services.AddHttpClient();
 var app = builder.Build();
 
 app.UseHttpsRedirection();
+app.UseStaticFiles();
 
 app.UseRouting();
 
@@ -41,10 +42,7 @@ app.UseAuthentication();
 app.UseAuthorization();
 
 app.MapControllers(); 
-app.UseEndpoints(endpoints =>
-{
-    endpoints.MapRazorPages();
-});
+app.MapRazorPages();
 
 app.Run();
 

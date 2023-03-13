@@ -1,0 +1,28 @@
+﻿@page 
+@model WebGoogle.Pages.Shared.IndexModel
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8" />
+	<title>Blog</title>
+	<link rel="stylesheet" type="text/css"  href="~/css/styles.css" />
+</head>
+<body>
+	<header>
+		<a href="/logout" class="button">Logout</a>
+	</header>
+	<form method="post" asp-antiforgery="true">
+		<p>
+			<label asp-for="Blog.Title">Title</label><br />
+			<input type="text" asp-for="Blog.Title" placeholder="Введите заголовок" />
+		</p>
+		<p>
+			<label asp-for="Blog.Body">Post</label><br />
+			<textarea asp-for="Blog.Body" placeholder="Введите текст"></textarea>
+		</p>
+		<input type="submit" value="Save" />
+	</form>
+</body>
+</html>

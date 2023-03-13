@@ -6,14 +6,14 @@ using System.Security.Claims;
 using System.Text;
 using WebGoogle.Models;
 
-namespace WebGoogle.Controllers.API
+namespace WebGoogle.Controllers
 {
     [ApiController]
     [Authorize]
     [Route("/api/blogs")]
     public class BlogController : ControllerBase
     {
-        private readonly string _filePath; 
+        private readonly string _filePath;
         private readonly IHttpContextAccessor _httpContextAccessor;
 
         private string? userId => _httpContextAccessor?.HttpContext?.User.FindFirstValue(ClaimTypes.NameIdentifier);
@@ -39,7 +39,7 @@ namespace WebGoogle.Controllers.API
                 List<BlogModel>? blogs = JsonConvert.DeserializeObject<List<BlogModel>>(json)?
                     .FindAll(p => p.Id == id);
 
-                return blogs?.Any() == true ? Ok(blogs) : NotFound();
+                return blogs?.Any() == true ? Ok(blogs) : NoContent();
             }
             catch
             {
