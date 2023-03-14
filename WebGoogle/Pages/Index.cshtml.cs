@@ -11,7 +11,6 @@ namespace WebGoogle.Pages.Shared
     public class IndexModel : PageModel
     {
         private readonly IHttpContextAccessor _httpContextAccessor;
-        private readonly string apiUrl = "https://localhost:7194/api/blogs";
 
         [BindProperty]
         public Blog Blog { get; set; } = new("Title", "Body");
@@ -24,7 +23,7 @@ namespace WebGoogle.Pages.Shared
         public void OnGet()
         {
             HttpClient httpClient = GetClient();
-            HttpResponseMessage? response = httpClient.GetAsync(apiUrl).Result;
+            HttpResponseMessage? response = httpClient.GetAsync(Constants.BlogAiUrl).Result;
 
             if (response.IsSuccessStatusCode)
             {
@@ -40,7 +39,7 @@ namespace WebGoogle.Pages.Shared
                     }
                     else
                     {
-                        httpClient.PostAsync(apiUrl, JsonContent.Create(Blog));
+                        httpClient.PostAsync(Constants.BlogAiUrl, JsonContent.Create(Blog));
                     }
                 }
                 catch
@@ -58,7 +57,7 @@ namespace WebGoogle.Pages.Shared
 		{
 			try
 			{
-				GetClient().PutAsync(apiUrl, JsonContent.Create(Blog));
+				GetClient().PutAsync(Constants.BlogAiUrl, JsonContent.Create(Blog));
 			}
 			catch
 			{

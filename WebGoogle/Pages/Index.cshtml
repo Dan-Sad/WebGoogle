@@ -16,11 +16,11 @@
 	<form method="post" asp-antiforgery="true">
 		<p>
 			<label asp-for="Blog.Title">Title</label><br />
-			<input type="text" asp-for="Blog.Title" placeholder="Введите заголовок" />
+			<input type="text" asp-for="Blog.Title" />
 		</p>
 		<p>
 			<label asp-for="Blog.Body">Post</label><br />
-			<textarea asp-for="Blog.Body" placeholder="Введите текст"></textarea>
+			<textarea asp-for="Blog.Body"></textarea>
 		</p>
 		<input type="submit" value="Save" />
 	</form>
